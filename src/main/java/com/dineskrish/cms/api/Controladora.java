@@ -9,6 +9,13 @@ public class Controladora {
 
     @GetMapping("/")
     public ModelAndView index(){
+        ModelAndView model = new ModelAndView("index");
+
+        return model;
+    }
+
+    @GetMapping("/ver")
+    public ModelAndView ver(){
         ModelAndView model = new ModelAndView("ver");
 
         return model;
