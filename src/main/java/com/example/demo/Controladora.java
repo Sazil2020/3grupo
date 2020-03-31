@@ -25,6 +25,11 @@ public class Controladora {
         return new ResponseEntity<Object>(map, HttpStatus.OK);
     }
 
+    @GetMapping("/ver")
+    public ModelAndView contactMe(){
+        ModelAndView model = new ModelAndView("ver");
+        return model;
+    }
     }
 
 
