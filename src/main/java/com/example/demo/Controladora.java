@@ -1,8 +1,13 @@
 package com.example.demo;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class Controladora {
@@ -13,12 +18,13 @@ public class Controladora {
 
         return model;
     }
-
-    @GetMapping("/ver")
-    public ModelAndView ver(){
-        ModelAndView model = new ModelAndView("ver");
-
-        return model;
+    @GetMapping("/ping")
+    public ResponseEntity<Object> ping(){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("alive", true);
+        return new ResponseEntity<Object>(map, HttpStatus.OK);
     }
 
-}
+    }
+
+
