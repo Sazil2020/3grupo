@@ -26,8 +26,13 @@ public class Controladora {
     }
 
     @GetMapping("/ver")
-    public ModelAndView contactMe(){
+    public ModelAndView contact(){
         ModelAndView model = new ModelAndView("ver");
+        return model;
+    }
+    @GetMapping("/Share")
+    public ModelAndView Shar(){
+        ModelAndView model = new ModelAndView("Share");
         return model;
     }
     }
