@@ -117,4 +117,31 @@ public class Controladora {
         }
         return primefactors;
     }
+
+    @GetMapping("/fire/geek")
+    public ResponseEntity<Object> geek(String width, String map){
+        HashMap <String,Object> maps = new HashMap<String,Object>();
+
+        String str="";
+        List<String> listaMap = new ArrayList<>();
+        List<String> listaMoves = new ArrayList<>();
+
+        for(int i=0; i<map.length();i++){
+            str+=map.charAt(i);
+            if((i+1)%3==0)
+                str+=",";
+        }
+
+        String[] result = str.split(",");
+        for(String s:result)
+            listaMap.add(s);
+
+        maps.put("map", listaMap);
+
+        //maps.put("moves",listaMoves);
+
+        return new ResponseEntity<Object>(maps, HttpStatus.OK);
+    }
+
+
 }
