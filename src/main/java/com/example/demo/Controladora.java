@@ -35,6 +35,11 @@ public class Controladora {
         ModelAndView model = new ModelAndView("Share");
         return model;
     }
+    @GetMapping("/Minesweeper")
+    public ModelAndView Minesweeper(){
+        return new ModelAndView("Minesweeper");
     }
+
+}
 
 

@@ -1,342 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Welcome at MiniYose</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-</head>
-<body>
-<style>
-    body{
-        margin: 0;
-    }
-
-    header{
-        background-color: #222222;
-        color: #68A343;
-        height: 100px;
-        margin-bottom: 1.5em;
-    }
-
-    header h1{
-        padding: 20px;
-        margin: 0;
-        width: auto;
-        float: left;
-    }
-
-    .externalbar-list{
-        float: right;
-        list-style-type: none;
-        text-align: center;
-        height: 100%;
-        margin: 0;
-    }
-
-    .externalbar-item{
-        margin: 0;
-        float: left;
-        margin: 0 10px 0 10px;
-        height: 100%;
-    }
-
-    .externalbar-item a{
-        color: #68A343;
-        display: inline-block;
-        width: 90px;
-        height: 100%;
-        text-decoration: none;
-    }
-
-    .externalbar-item a:hover{
-        background-color: #68A343;
-        color: #222222;
-    }
-
-    .externalbar-item i{
-        padding-top: 20px;
-        line-height: 1em;
-        font-size: 2em;
-    }
-
-    .content{
-        padding-left: 1em;
-        padding-right: 1em;
-    }
-
-</style>
-<header class="row">
-    <h1>Hello Yose</h1>
-    <div class="externalbar">
-        <ul class="externalbar-list">
-            <li class="externalbar-item"><a id="repository-link" href="https://github.com/MiniKeb/MiniYose"><i class="fa fa-github"></i><br/>Repository</a></li>
-            <li class="externalbar-item"><a id="contact-me-link" href="https://twitter.com/minikeb"><i class="fa fa-envelope"></i><br/>Contact</a></li>
-        </ul>
-    </div>
-</header>
-<div class="content">
+    <meta charset="UTF-8">
+    <title>Minesweeper</title>
     <style>
-        .minesweeper
-        {
-            border: 2px solid #888888;
-            border-collapse: collapse;
-        }
-
-        .minesweeper td
-        {
-            border: 2px solid #888888;
-            background-color: #DDDDDD;
-            width: 15px;
-            height: 15px;
-            padding: 0;
+        BODY {
+            background: black;
+            color: #DDDDDD;
+            font-family: courier new;
             text-align: center;
-            font-size: 0.8em;
         }
 
-        .minesweeper td.lost{
-            background-color: #FF0000;
+        H1 {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: normal;
+        }
+        #grid {
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .minesweeper td.suspect{
-            background-color: #FFF000;
+        #grid TR TD{
+            border:1px solid white;
+            background: #999999;
+            width: 16px;
+            height: 16px;
+            text-align: center;
         }
 
-        .minesweeper td.safe{
-            background-color: #FFFFFF;
+        #grid TR TD.clicked {
+            background: #333333;
         }
+
+        #grid TR TD.mine {
+            background: #FF0000;
+        }
+
+        BUTTON {
+            margin: 12px;
+        }
+
     </style>
+</head>
 
-    <!-- <script type="text/javascript" src="/minesweeper.js"></script> -->
+<body>
+<H1 id="title">Minesweeper</H1>
+<table id=grid>
+</table>
+<BUTTON onclick="load();">Reset Grid</BUTTON>
 
-    <h1 id="title">Minesweeper</h1>
-    <label for="suspect-mode">Suspect Mode</label><input type="checkbox" id="suspect-mode" />
-    <table id="minesweeper-table" class="minesweeper">
-        <tr>
-            <td id="cell-1x1">&nbsp;</td>
-            <td id="cell-1x2">&nbsp;</td>
-            <td id="cell-1x3">&nbsp;</td>
-            <td id="cell-1x4">&nbsp;</td>
-            <td id="cell-1x5">&nbsp;</td>
-            <td id="cell-1x6">&nbsp;</td>
-            <td id="cell-1x7">&nbsp;</td>
-            <td id="cell-1x8">&nbsp;</td>
-        </tr>
-        <tr>
-            <td id="cell-2x1">&nbsp;</td>
-            <td id="cell-2x2">&nbsp;</td>
-            <td id="cell-2x3">&nbsp;</td>
-            <td id="cell-2x4">&nbsp;</td>
-            <td id="cell-2x5">&nbsp;</td>
-            <td id="cell-2x6">&nbsp;</td>
-            <td id="cell-2x7">&nbsp;</td>
-            <td id="cell-2x8">&nbsp;</td>
-        </tr>
-        <tr>
-            <td id="cell-3x1">&nbsp;</td>
-            <td id="cell-3x2">&nbsp;</td>
-            <td id="cell-3x3">&nbsp;</td>
-            <td id="cell-3x4">&nbsp;</td>
-            <td id="cell-3x5">&nbsp;</td>
-            <td id="cell-3x6">&nbsp;</td>
-            <td id="cell-3x7">&nbsp;</td>
-            <td id="cell-3x8">&nbsp;</td>
-        </tr>
-        <tr>
-            <td id="cell-4x1">&nbsp;</td>
-            <td id="cell-4x2">&nbsp;</td>
-            <td id="cell-4x3">&nbsp;</td>
-            <td id="cell-4x4">&nbsp;</td>
-            <td id="cell-4x5">&nbsp;</td>
-            <td id="cell-4x6">&nbsp;</td>
-            <td id="cell-4x7">&nbsp;</td>
-            <td id="cell-4x8">&nbsp;</td>
-        </tr>
-        <tr>
-            <td id="cell-5x1">&nbsp;</td>
-            <td id="cell-5x2">&nbsp;</td>
-            <td id="cell-5x3">&nbsp;</td>
-            <td id="cell-5x4">&nbsp;</td>
-            <td id="cell-5x5">&nbsp;</td>
-            <td id="cell-5x6">&nbsp;</td>
-            <td id="cell-5x7">&nbsp;</td>
-            <td id="cell-5x8">&nbsp;</td>
-        </tr>
-        <tr>
-            <td id="cell-6x1">&nbsp;</td>
-            <td id="cell-6x2">&nbsp;</td>
-            <td id="cell-6x3">&nbsp;</td>
-            <td id="cell-6x4">&nbsp;</td>
-            <td id="cell-6x5">&nbsp;</td>
-            <td id="cell-6x6">&nbsp;</td>
-            <td id="cell-6x7">&nbsp;</td>
-            <td id="cell-6x8">&nbsp;</td>
-        </tr>
-        <tr>
-            <td id="cell-7x1">&nbsp;</td>
-            <td id="cell-7x2">&nbsp;</td>
-            <td id="cell-7x3">&nbsp;</td>
-            <td id="cell-7x4">&nbsp;</td>
-            <td id="cell-7x5">&nbsp;</td>
-            <td id="cell-7x6">&nbsp;</td>
-            <td id="cell-7x7">&nbsp;</td>
-            <td id="cell-7x8">&nbsp;</td>
-        </tr>
-        <tr>
-            <td id="cell-8x1">&nbsp;</td>
-            <td id="cell-8x2">&nbsp;</td>
-            <td id="cell-8x3">&nbsp;</td>
-            <td id="cell-8x4">&nbsp;</td>
-            <td id="cell-8x5">&nbsp;</td>
-            <td id="cell-8x6">&nbsp;</td>
-            <td id="cell-8x7">&nbsp;</td>
-            <td id="cell-8x8">&nbsp;</td>
-        </tr>
-    </table>
+<script>
+    //Sarmento is building this. Follow me
+    var grid = document.getElementById("grid");
+    var testMode = false; //Turn this variable to true to see where the mines are
+    load();
 
-    <script type="text/javascript">
-        (
-            function init(){
-                var size = 8;
-                var grid = [];
-                for(var y = 0; y < size; y++){
-                    grid.push([]);
-                    for(var x = 0; x < size; x++){
-                        var cellValue = Math.random() < 0.15 ? 'bomb' : 'empty';
-                        grid[y].push(cellValue);
-                    }
-                }
+    function load() {
+        //generate 8 by 8 grid
+        grid.innerHTML="";
+        for (var i=0; i<8; i++) {
+            row = grid.insertRow(i);
+            for (var j=0; j<8; j++) {
+                cell = row.insertCell(j);
+                cell.id = "cell-"+(i+1)+"x"+(j+1);
 
-                document.grid = grid;
-                load();
-            })();
+                cell.onclick = function() { clickCell(this); };
 
-        function load(){
-            var soluceGrid = getSoluceGrid(document.grid);
-            var table = document.getElementById("minesweeper-table");
-            table.onclick = function(event){
-                gridClicked(event, table, soluceGrid);
-            };
-        }
+                var mine = document.createAttribute("data-mine");
+                mine.value = "empty";
 
-        function gridClicked(event, table, soluce){
-            event = event || window.event;
-            var target = event.target || event.srcElement;
+                if((i==3 && j==4)||(i==2 && j==5))
+                    mine.value = "bomb";
 
-            while(target != table) {
-                if (target.nodeName == 'TD') {
-                    reveal(target, soluce);
-                }
-                target = target.parentNode;
+                cell.setAttributeNode(mine);
             }
         }
+        addMines();
+    }
 
-        function getPosition(cell){
-            var currentPosition = cell.id.split("-")[1].split("x");
-            var currentLineIndex = parseInt(currentPosition[0]) - 1;
-            var currentCellIndex = parseInt(currentPosition[1]) - 1;
+    function addMines() {
+        //Add mines randomly
+        for (var i=0; i<16; i++) {
+            var row = Math.floor(Math.random() * 8);
+            var col = Math.floor(Math.random() * 8);
+            var cell = grid.rows[row].cells[col];
+            cell.setAttribute("data-mine","bomb");
 
-            return {
-                x: currentCellIndex,
-                y: currentLineIndex
-            };
         }
+    }
 
-        function getSoluceGrid(sourceGrid){
-            var soluceGrid = [];
+    function clickCell(cell) {
+        //Check if the end-user clicked on a mine
+        if (cell.getAttribute("data-mine") === "bomb")
+            cell.innerHTML="X";
 
-            for(var rowIndex in sourceGrid)
-            {
-                var lineIx = parseInt(rowIndex);
-                soluceGrid.push([]);
-                for(var cellIndex in sourceGrid[lineIx])
-                {
-                    var cellIx = parseInt(cellIndex);
-                    var position = {
-                        y: lineIx,
-                        x: cellIx
-                    };
+        cell.className = "lost";
 
-                    soluceGrid[position.y].push(getSoluceValue(sourceGrid, position));
+        if (cell.getAttribute("data-mine") === "empty") {
+            // cell.className = "safe";
+
+            var mineCount = 0;
+            var cellRow = cell.parentNode.rowIndex;
+            var cellCol = cell.cellIndex;
+            //alert(cellRow + " " + cellCol);
+            for (var i = Math.max(cellRow - 1, 0); i <= Math.min(cellRow + 1, 7); i++) {
+                for (var j = Math.max(cellCol - 1, 0); j <= Math.min(cellCol + 1, 7); j++) {
+                    if (grid.rows[i].cells[j].getAttribute("data-mine") == "bomb")
+                        mineCount++;
                 }
             }
-
-            return soluceGrid;
+            cell.innerHTML = mineCount;
         }
 
-        function getSoluceValue(grid, position){
-            var gridSize = {
-                width: grid[0].length,
-                height: grid.length
-            };
+    }
 
-            if(grid[position.y][position.x] == "bomb")
-                return "X";
+</script>
 
-            var value = 0;
-            applyOnNeighbourgs(position, gridSize, function(neighbourgPosition){
-                if(grid[neighbourgPosition.y][neighbourgPosition.x] == "bomb")
-                    value++;
-            });
-            return value;
-        }
-
-        function applyOnNeighbourgs(cellPosition, gridSize, apply){
-            for(var y = -1; y <= 1; y++){
-                for(var x = -1; x <= 1; x++){
-                    var isCurrent = (y == 0) && (x == 0);
-                    if (!isCurrent){
-                        var neighbourgLine = cellPosition.y + y;
-                        var neighbourgCell = cellPosition.x + x;
-
-                        var isInTable = neighbourgLine >= 0
-                            && neighbourgCell >= 0
-                            && neighbourgLine < gridSize.height
-                            && neighbourgCell < gridSize.width;
-
-                        if(isInTable){
-                            apply({x: neighbourgCell, y: neighbourgLine});
-                        }
-                    }
-                }
-            }
-        }
-
-        function getCell(position){
-            return document.getElementById("cell-"+ (position.y+1) +"x"+ (position.x+1));
-        }
-
-        function reveal(cell, soluceGrid){
-            var gridSize = {
-                width: soluceGrid[0].length,
-                height: soluceGrid.length
-            };
-            var position = getPosition(cell);
-            var value = soluceGrid[position.y][position.x];
-            var isSuspectMode = document.getElementById("suspect-mode").checked;
-            if (isSuspectMode){
-                cell.setAttribute("class", "suspect");
-            } else {
-                if (value == "X"){
-                    cell.setAttribute("class", "lost");
-
-                }else{
-                    cell.setAttribute("class", "safe");
-                    if(parseInt(value) > 0){
-                        cell.innerHTML = value;
-                    }else{
-                        cell.innerHTML = "";
-
-                        applyOnNeighbourgs(position, gridSize, function(neighbourgPosition){
-                            var current = getCell(neighbourgPosition);
-                            if(!current.getAttribute("class"))
-                                reveal(current, soluceGrid);
-                        });
-                    }
-                }
-            }
-        }
-    </script>
-</div>
 </body>
+
 </html>
