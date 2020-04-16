@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#go").click(function() {
+
+                var number =document.getElementById("number").value;
+                if(number.indexOf(",") != -1) {
+                    //alert('sacanagem');
+                    var results=[];
+                    var list= number.split(',')
+                    const lista = document.getElementById('results');
+
+                    for(var n=0;n<3;n++){
+                        results[n]=decomp(list[n])
+                        var item = document.createElement('li');
+                        item.appendChild(document.createTextNode(results[n]));
+
+
+                        lista.appendChild(item);
+
+                    }
+
+                }else {
+                    var result = decomp(number);
+                    $("#result").html( result);
+
+                }
+
+
+            });
+        });
+        function decomp(numb) {
+            var number= numb;
+            var primefactors = [];
+            primefactors = prime(number);
+            var result = number + ' = ' + primefactors.join(' x ')
+            if (number > 1000000) {
+                result = 'too big number (>1e6)';
+            }
+            if (/[a-zA-Z]/.test(number)) {
+                result = '' + number + ' is not a number ';
+            }
+            if (number < 0) {
+                result = '' + number + ' is not an integer > 1';
+            }
+            return result;
+        }
+        function prime(numb) {
+
+            var number =numb;
+            var primefactors=[];
+            var copyOfInput = number;
+            for (var i = 2; i <= copyOfInput; i++) {
+                if (copyOfInput % i == 0) {
+                    primefactors.push(i); // prime factor
+                    copyOfInput /= i;
+                    i--;
+                }
+            }
+            return primefactors;
+        }
+    </script>
+</head>
+<body>
+
+<div  id="title">
+    <H1>Prime Factors</H1>
+</div>
+<div  id="invitation">
+    <H3>incira o numero</H3>
+</div>
+<div >
+    <input type="text" id="number" name="number"><br><br>
+</div>
+<BUTTON id="go" >Go</BUTTON>
+`   <div id="fresult">
+    <p>
+    <H3>Deconpocicao do numero </H3>
+    </p>
+</div>
+<p id="result">
+
+</p>
+<div>
+    <ol id="results"></ol>
+</div>
+
+
+</body>
+</html>

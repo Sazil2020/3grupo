@@ -39,7 +39,10 @@ public class Controladora {
     public ModelAndView Minesweeper(){
         return new ModelAndView("Minesweeper");
     }
-
+    @GetMapping("/primeFactors/ui")
+    public ModelAndView primeFactors(){
+        return new ModelAndView("primefactor");
+    }
 }
 
 
