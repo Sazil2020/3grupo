@@ -30,9 +30,9 @@ public class Controladora {
         ModelAndView model = new ModelAndView("ver");
         return model;
     }
-    @GetMapping("/Share")
+    @GetMapping("/Minesweeper")
     public ModelAndView Shar(){
-        ModelAndView model = new ModelAndView("Share");
+        ModelAndView model = new ModelAndView("Minesweeper");
         return model;
     }
     }
